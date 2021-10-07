@@ -407,3 +407,5 @@ def testPositionClass():
 deck = DeckClass(deckDetails,shuffle=False)
 print(str(deck))
 #testFoundationPileClass()
+
+#test
