@@ -342,6 +342,30 @@ class PositionClass():
         #ToDo need to test this function
     #end moveFoundationToTableau
 
+    def moveByNumber(self, num):
+        """ takes a number in, which controls what move to do """
+        if num==1:
+            ret=self.moveStockToWaste()
+        elif num==2:
+            ret=self.moveStockToFoundation()
+        elif num==3:
+            ret=self.moveTableauToFoundation(0)
+        elif num==4:
+            ret=self.moveTableauToFoundation(1)
+        elif num==5:
+            ret=self.moveTableauToFoundation(2)
+        elif num==6:
+            ret=self.moveTableauToFoundation(3)
+        elif num==7:
+            ret=self.moveTableauToFoundation(4)
+        elif num==8:
+            ret=self.moveTableauToFoundation(5)
+        elif num==9:
+            ret=self.moveTableauToFoundation(6)
+        else:
+            ret=False
+        return ret
+    #end moveByNumber
 #end PositionClass
 
 def testPositionClass():
@@ -399,6 +423,8 @@ def testPositionClass():
     # position.moveStockToWaste()
     # print(str(position))
 #end testPositionClass
+
+
 
 # ToDo test moveStock
 
