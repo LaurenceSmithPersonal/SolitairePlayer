@@ -7,6 +7,8 @@ def interactivePlay():
     """ Allows you to play an interactive game of solitaire """
     stop = False
     pos = PositionClass.PositionClass()
+    pos.setUp()
+    print(pos.gameStr())
     while not stop:
         print()
         k = input("Input your move:")
@@ -21,11 +23,12 @@ def interactivePlay():
             2 = move stock to foundation
             3-9 = move tableau piles 0 to 6 to foundation
             """
+            print(s)
         elif k.isdigit():
             ret = pos.moveByNumber(int(k))
-            
+            print(pos.gameStr())
         else: 
-            ret = 
+            ret = False
             print("Move not recognised")
     #end while
     
