@@ -198,7 +198,7 @@ def testFoundationPileClass():
     #deck = DeckClass()
 #end testFoundationPileClass
 
-testFoundationPileClass()
+#testFoundationPileClass()
 
 class TableauPileClass:
     # Tableau pile where you build down cards and start with some face down
@@ -276,9 +276,23 @@ class PositionClass():
         return "Position:\n" + foundStr0 + "\n" + foundStr1 + "\n" + foundStr2 + "\n" + foundStr3 + "\n" + stockStr + "\n" + wasteStr + "\n" + tableauStr
     #end __str__
 
+    def gameStr(self) -> str:
+        foundStr0 = "Foundation Clubs: " + self.foundationPiles[0].gameStr()
+        foundStr1 = "Foundation Diamonds: " + self.foundationPiles[1].gameStr()
+        foundStr2 = "Foundation Hearts: " + self.foundationPiles[2].gameStr()
+        foundStr3 = "Foundation Spades: " + self.foundationPiles[3].gameStr()
+        stockStr = "Stock: " + self.stock.gameStr()
+        wasteStr = "Waste: " + self.waste.gameStr()
+        tableauStr = "Tableau:\n"
+        for i in np.arange(0,7):
+            tableauStr = tableauStr + "Pile " + str(i) + ": " + self.tableauPiles[i].gameStr() + "\n"
+
+        return "Position:\n" + foundStr0 + "\n" + foundStr1 + "\n" + foundStr2 + "\n" + foundStr3 + "\n" + stockStr + "\n" + wasteStr + "\n" + tableauStr
+    #end __str__
+
     def setUp(self):
         """put everything into position to start a random game"""
-        deck = DeckClass()
+        deck = DeckClass(deckDetails)
         #fill tableau
         for i in np.arange(0,7):
             for j in np.arange(0, i+1):
@@ -396,6 +410,7 @@ def testPositionClass():
     print("finished set up")
     print("Print position")
     print(str(position))
+    print(position.gameStr())
 
     # test moving each tableau to foundation
     for i in np.arange(0,7):
@@ -448,7 +463,7 @@ def testPositionClass():
 
 # ToDo test moveStock
 
-#testPositionClass()
+testPositionClass()
 #test
 #deck = DeckClass(deckDetails,shuffle=False)
 #print(str(deck))
