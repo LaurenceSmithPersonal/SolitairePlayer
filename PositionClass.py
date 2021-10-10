@@ -33,17 +33,17 @@ deckDetails = pd.read_csv("deckdetails.csv") #dataframe of card details
 
 
 global CLUBS
-CLUBS = 21
+CLUBS = "clubs"
 global DIAMONDS
-DIAMONDS = 22
+DIAMONDS = "diamonds"
 global HEARTS
-HEARTS = 23
+HEARTS = "hearts"
 global SPADES
-SPADES = 24
+SPADES = "spades"
 global RED
-RED = 30
+RED = "red"
 global BLACK
-BLACK = 31
+BLACK = "black"
 
 class CardClass:
     """ class to hold a single card """
@@ -112,6 +112,9 @@ class StockClass:
     def __str__(self):
         return ", ".join([str(card) for card in self.cards])
 
+    def gameStr(self):
+        return ", ".join([card.gameStr() for card in self.cards])
+
     def addCard(self, cardIn):
         cardIn.visible = False
         self.cards.append(cardIn)
@@ -124,6 +127,9 @@ class WasteClass:
     
     def __str__(self):
         return ", ".join([str(card) for card in self.cards])
+
+    def gameStr(self):
+        return ", ".join([card.gameStr() for card in self.cards])
 
     def addCard(self, cardIn):
         cardIn.visible = True
@@ -139,7 +145,14 @@ class FoundationPileClass:
     def __str__(self):
         if len(self.cards) == 0:
             return "empty foundation pile for suit " + str(self.suit)
-        return ", ".join([str(card) for card in self.cards])
+        else: 
+            return ", ".join([str(card) for card in self.cards])
+
+    def gameStr(self):
+        if len(self.cards) == 0:
+            return "empty foundation pile for suit " + str(self.suit)
+        else: 
+            return ", ".join([card.gameStr() for card in self.cards])
 
     def addCard(self, cardIn):
         # check to see if can add it
@@ -167,21 +180,25 @@ def testFoundationPileClass():
     # testing
     print("\nTest: can add correct ace to right empty pile")
     heartPile = FoundationPileClass(HEARTS)
-    HA = CardClass(HEARTS, 1)
+    HA = CardClass(26,"A",1,"hearts", 9829, "red")
     HA.flip()
     print(heartPile.addCard(HA))
     print(str(heartPile))
+    print(heartPile.gameStr())
 
     print("\nTest: can't add wrong ace to right empty pile")
     heartPile = FoundationPileClass(HEARTS)
-    SA = CardClass(SPADES, 1)
+    SA = CardClass(39,"A",1,"spades", 9824, "black")
     SA.flip()
     print(heartPile.addCard(SA))
     print(str(heartPile))
+    print(heartPile.gameStr())
     
     
-    deck = DeckClass()
+    #deck = DeckClass()
 #end testFoundationPileClass
+
+testFoundationPileClass()
 
 class TableauPileClass:
     # Tableau pile where you build down cards and start with some face down
@@ -190,6 +207,9 @@ class TableauPileClass:
     
     def __str__(self):
         return ", ".join([str(card) for card in self.cards])
+
+    def gameStr(self):
+        return ", ".join([card.gameStr() for card in self.cards])
 
     def addCard(self, cardIn):
         # for adding cards during the game
