@@ -430,8 +430,8 @@ def testPositionClass():
 
 #testPositionClass()
 #test
-deck = DeckClass(deckDetails,shuffle=False)
-print(str(deck))
+#deck = DeckClass(deckDetails,shuffle=False)
+#print(str(deck))
 #testFoundationPileClass()
 
 #test
