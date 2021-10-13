@@ -26,7 +26,10 @@ def interactivePlay():
             print(s)
         elif k.isdigit():
             ret = pos.moveByNumber(int(k))
-            print(pos.gameStr())
+            if ret == False:
+                print("Move not recognised")
+            else:    
+                print(pos.gameStr())
         else: 
             ret = False
             print("Move not recognised")
