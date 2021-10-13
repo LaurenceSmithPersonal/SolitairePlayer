@@ -360,7 +360,8 @@ class PositionClass():
                 if card.suit == pile.suit:
                     ret = pile.addCard(card)
                     if ret == True:
-                        self.tableauPiles[tableauNum].cards.remove(self.tableauPiles[tableauNum].cards[-1])
+                        self.tableauPiles[tableauNum].cards.remove(self.tableauPiles[tableauNum].cards[-1]) # remove card from pile
+                        self.tableauPiles[tableauNum].cards[-1].visible = True # make new top card visible
             return ret
     #end moveTableauToFoundation
 
