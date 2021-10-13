@@ -324,8 +324,8 @@ class PositionClass():
                     self.stock.cards.insert(0, deepcopy(card)) #need to copy otherwise it is removed when we delete it, insert at start to get correct order
                     #self.waste.cards.remove(card) # doesn't work as removing messes up iteration add in another for loop below
                 self.waste.cards = [] #no cards in waste
-                for card in self.stock.cards:
-                    card.visible = False
+                #for card in self.stock.cards:
+                #    card.visible = False
                 return True
         else: # cards in stock so move 3 cards from stock to waste (or fewer if fewer available)
             for i in np.arange(0,3):
