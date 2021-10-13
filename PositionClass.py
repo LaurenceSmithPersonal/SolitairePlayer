@@ -118,7 +118,7 @@ class StockClass:
         return ", ".join([card.gameStr() for card in self.cards])
 
     def addCard(self, cardIn):
-        cardIn.visible = False
+        cardIn.visible = True   #make all visible as could always just go through them all first
         self.cards.append(cardIn)
 # end StockClass
 
