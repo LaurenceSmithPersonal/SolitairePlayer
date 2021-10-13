@@ -13,15 +13,14 @@
 # used https://github.com/suryadutta/solitaire/blob/master/card_elements.py for help with coding
 
 # ToDo 
-#   - make sure that top tableau card is visible after each move
-#   - make stock always visible (simplification as can always go through them all once at the start)
+#   - moving foundation piles to foundation piles
 #   - create index for each card, with a value if don't know what card is
 #   - create index for positions
 #   - reading in positions
 #   - writing out positions
 #   - create index for moves
 #   - scoring function or check if won function
-#   - moving foundation piles to foundation piles
+
 #   - game class for playing games / simulating games
 #   - commit and push to GitHub
 
