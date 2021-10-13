@@ -336,19 +336,19 @@ class PositionClass():
             return True
     #end moveStockToWaste        
 
-    def moveStockToFoundation(self):
+    def moveWasteToFoundation(self):
         """ moves a card from Stock to correct Foundation """
-        if len(self.stock.cards) == 0:
+        if len(self.waste.cards) == 0:
             return False
         else:
-            card = deepcopy(self.stock.cards[-1])
+            card = deepcopy(self.waste.cards[-1])
             for pile in self.foundationPiles:
                 if card.suit == pile.suit:
                     ret = pile.addCard(card)
                     if ret == True:
-                        self.stock.cards.remove(self.stock.cards[-1])
+                        self.waste.cards.remove(self.waste.cards[-1])
             return ret
-    #end moveStockToFoundation
+    #end moveWasteToFoundation
 
     def moveTableauToFoundation(self, tableauNum):
         """ moves a card from Stock to correct Foundation """
@@ -362,7 +362,7 @@ class PositionClass():
                     if ret == True:
                         self.tableauPiles[tableauNum].cards.remove(self.tableauPiles[tableauNum].cards[-1])
             return ret
-    #end moveStockToFoundation
+    #end moveTableauToFoundation
 
     def moveFoundationToTableau(self, foundationNum, tableauNum):
         """ moves a card from Foundation to stock """
@@ -383,7 +383,7 @@ class PositionClass():
         if num==1:
             ret=self.moveStockToWaste()
         elif num==2:
-            ret=self.moveStockToFoundation()
+            ret=self.moveWasteToFoundation()
         elif num==3:
             ret=self.moveTableauToFoundation(0)
         elif num==4:
@@ -424,39 +424,39 @@ def testPositionClass():
     # test moving stock to waste and back
     # print(str(position))
     # print("Testing moveStock")
-    # print("moveStockToFoundation: ", position.moveStockToFoundation())
+    # print("moveWasteToFoundation: ", position.moveWasteToFoundation())
     # position.moveStockToWaste()
     # print(str(position))
     # print("Testing moveStock")
-    # print("moveStockToFoundation: ", position.moveStockToFoundation())
+    # print("moveWasteToFoundation: ", position.moveWasteToFoundation())
     # position.moveStockToWaste()
     # print(str(position))
     # print("Testing moveStock")
-    # print("moveStockToFoundation: ", position.moveStockToFoundation())
+    # print("moveWasteToFoundation: ", position.moveWasteToFoundation())
     # position.moveStockToWaste()
     # print(str(position))
     # print("Testing moveStock")
-    # print("moveStockToFoundation: ", position.moveStockToFoundation())
+    # print("moveWasteToFoundation: ", position.moveWasteToFoundation())
     # position.moveStockToWaste()
     # print(str(position))
     # print("Testing moveStock")
-    # print("moveStockToFoundation: ", position.moveStockToFoundation())
+    # print("moveWasteToFoundation: ", position.moveWasteToFoundation())
     # position.moveStockToWaste()
     # print(str(position))
     # print("Testing moveStock")
-    # print("moveStockToFoundation: ", position.moveStockToFoundation())
+    # print("moveWasteToFoundation: ", position.moveWasteToFoundation())
     # position.moveStockToWaste()
     # print(str(position))
     # print("Testing moveStock")
-    # print("moveStockToFoundation: ", position.moveStockToFoundation())
+    # print("moveWasteToFoundation: ", position.moveWasteToFoundation())
     # position.moveStockToWaste()
     # print(str(position))
     # print("Testing moveStock")
-    # print("moveStockToFoundation: ", position.moveStockToFoundation())
+    # print("moveWasteToFoundation: ", position.moveWasteToFoundation())
     # position.moveStockToWaste()
     # print(str(position))
     # print("Testing moveStock")
-    # print("moveStockToFoundation: ", position.moveStockToFoundation())
+    # print("moveWasteToFoundation: ", position.moveWasteToFoundation())
     # position.moveStockToWaste()
     # print(str(position))
 #end testPositionClass
@@ -465,7 +465,7 @@ def testPositionClass():
 
 # ToDo test moveStock
 
-testPositionClass()
+#testPositionClass()
 #test
 #deck = DeckClass(deckDetails,shuffle=False)
 #print(str(deck))
