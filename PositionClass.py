@@ -350,7 +350,7 @@ class PositionClass():
     #end moveWasteToFoundation
 
     def moveTableauToFoundation(self, tableauNum):
-        """ moves a card from Stock to correct Foundation """
+        """ moves a card from Tableau to correct Foundation """
         if len(self.tableauPiles[tableauNum].cards) == 0:
             return False
         else:
@@ -377,6 +377,24 @@ class PositionClass():
             return ret
         #ToDo need to test this function
     #end moveFoundationToTableau
+
+    def moveTableauToTableau(self, startTableauNum, endTableauNum, numCards):
+        """ moves cards from Tableau to another Tableau """
+        if len(self.tableauPiles[startTableauNum].cards) < numCards:  #trying to move more cards than exist
+            return False
+        elif False:   # check whether top card in start Tableau is visible
+            #ToDo
+            return False
+        elif False:   # check whether bottom card in end tableau is visible
+            #ToDo
+            return False
+        elif False:   # check whether bottom card in end tableau is the right colour and value
+            #ToDo
+            return False
+        else: # move the cards
+            #ToDo
+            return ret
+    #end moveTableauToTableau
 
     def moveByNumber(self, num):
         """ takes a number in, which controls what move to do """
