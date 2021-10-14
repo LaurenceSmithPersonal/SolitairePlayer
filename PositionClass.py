@@ -382,15 +382,20 @@ class PositionClass():
         """ moves cards from Tableau to another Tableau """
         if len(self.tableauPiles[startTableauNum].cards) < numCards:  #trying to move more cards than exist
             return False
-        elif False:   # check whether top card in start Tableau is visible
-            #ToDo
+        elif self.tableauPiles[startTableauNum].cards[-numCards].visible == False:   # check whether top card in start Tableau is visible
             return False
-        elif False:   # check whether bottom card in end tableau is visible
-            #ToDo
+        elif len(self.tableauPiles[endTableauNum].cards) == 0:  #moving to an empty pile
+            if self.tableauPiles[startTableauNum].cards[-numCards].value == 13:  #It is a king so can move to empty pile
+                #ToDo move pile as top card is a king
+                pass
+            else:
+                return False  # Not a king
+        elif self.tableauPiles[endTableauNum].cards[-1].visible == False:   # check whether bottom card in end tableau is visible
             return False
-        elif False:   # check whether bottom card in end tableau is the right colour and value
-            #ToDo
+        elif self.tableauPiles[startTableauNum].cards[-numCards].colour == self.tableauPiles[endTableauNum].cards[-1].colour:   # check whether bottom card in end tableau is the right colour
             return False
+        elif False: # check whether bottom card in end tableau is the wrong value
+            pass
         else: # move the cards
             #ToDo
             return ret
