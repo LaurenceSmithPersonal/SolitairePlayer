@@ -351,7 +351,10 @@ class PositionClass():
 
     def moveTableauToFoundation(self, tableauNum):
         """ moves a card from Tableau to correct Foundation """
-        if len(self.tableauPiles[tableauNum].cards) == 0:
+        if tableauNum < 0 or tableauNum > 6:
+            print("tableauNum:", tableauNum, " not allowed!")
+            return False
+        elif len(self.tableauPiles[tableauNum].cards) == 0:
             return False
         else:
             card = deepcopy(self.tableauPiles[tableauNum].cards[-1])
@@ -366,7 +369,13 @@ class PositionClass():
 
     def moveFoundationToTableau(self, foundationNum, tableauNum):
         """ moves a card from Foundation to stock """
-        if len(self.foundationPiles[foundationNum].cards) == 0:  #no cards in foundation pile
+        if tableauNum < 0 or tableauNum > 6:
+            print("tableauNum:", tableauNum, " not allowed!")
+            return False
+        elif foundationNum < 0 or foundationNum > 3:
+            print("foundationNum:", foundationNum, " not allowed!")
+            return False    
+        elif len(self.foundationPiles[foundationNum].cards) == 0:  #no cards in foundation pile
             return False
         else:
             card = deepcopy(self.foundationPiles[foundationNum].cards[-1])
@@ -381,7 +390,13 @@ class PositionClass():
     def moveTableauToTableau(self, startTableauNum, endTableauNum, numCards):
         """ moves cards from Tableau to another Tableau """
         ok_to_move = False
-        if len(self.tableauPiles[startTableauNum].cards) < numCards:  #trying to move more cards than exist
+        if startTableauNum < 0 or startTableauNum > 6:
+            print("startTableauNum:", startTableauNum, " not allowed!")
+            ok_to_move = False
+        elif endTableauNum < 0 or endTableauNum > 6:
+            print("endTableauNum:", endTableauNum, " not allowed!")
+            ok_to_move = False        
+        elif len(self.tableauPiles[startTableauNum].cards) < numCards:  #trying to move more cards than exist
             ok_to_move = False
         elif self.tableauPiles[startTableauNum].cards[-numCards].visible == False:   # check whether top card in start Tableau is visible
             ok_to_move = False
