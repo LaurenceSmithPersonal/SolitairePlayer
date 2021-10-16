@@ -380,25 +380,38 @@ class PositionClass():
 
     def moveTableauToTableau(self, startTableauNum, endTableauNum, numCards):
         """ moves cards from Tableau to another Tableau """
+        ok_to_move = False
         if len(self.tableauPiles[startTableauNum].cards) < numCards:  #trying to move more cards than exist
-            return False
+            ok_to_move = False
         elif self.tableauPiles[startTableauNum].cards[-numCards].visible == False:   # check whether top card in start Tableau is visible
-            return False
+            ok_to_move = False
         elif len(self.tableauPiles[endTableauNum].cards) == 0:  #moving to an empty pile
             if self.tableauPiles[startTableauNum].cards[-numCards].value == 13:  #It is a king so can move to empty pile
-                #ToDo move pile as top card is a king
-                pass
+                ok_to_move = True
             else:
-                return False  # Not a king
+                ok_to_move = False  # Not a king
+        # don't need to do all below checks as done as part of addCard but might be useful
         elif self.tableauPiles[endTableauNum].cards[-1].visible == False:   # check whether bottom card in end tableau is visible
-            return False
+            ok_to_move = False
         elif self.tableauPiles[startTableauNum].cards[-numCards].colour == self.tableauPiles[endTableauNum].cards[-1].colour:   # check whether bottom card in end tableau is the right colour
-            return False
-        elif False: # check whether bottom card in end tableau is the wrong value
-            pass
+            ok_to_move = False
+        elif self.tableauPiles[startTableauNum].cards[-numCards].value != self.tableauPiles[endTableauNum].cards[-1].value - 1: # check whether bottom card in end tableau is the wrong value
+            ok_to_move = False
         else: # move the cards
-            #ToDo
-            return ret
+            ok_to_move = True
+
+        if ok_to_move:
+            #move cards
+            #put cards in end pile
+            for i in np.arange(-numCards, 0,1):
+                card = deepcopy(self.tableauPiles[startTableauNum].cards[i])
+                ret = self.tableauPiles[endTableauNum].addCard(card)
+            for i in np.arange(-numCards, 0,1):
+                #remove cards from start pile
+                self.tableauPiles[startTableauNum].cards.pop(-1)
+            return True
+        else:
+            return False
     #end moveTableauToTableau
 
     def moveByNumber(self, num):
