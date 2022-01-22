@@ -435,20 +435,9 @@ class PositionClass():
             ret=self.moveStockToWaste()
         elif num==2:
             ret=self.moveWasteToFoundation()
-        elif num==3:
-            ret=self.moveTableauToFoundation(0)
-        elif num==4:
-            ret=self.moveTableauToFoundation(1)
-        elif num==5:
-            ret=self.moveTableauToFoundation(2)
-        elif num==6:
-            ret=self.moveTableauToFoundation(3)
-        elif num==7:
-            ret=self.moveTableauToFoundation(4)
-        elif num==8:
-            ret=self.moveTableauToFoundation(5)
-        elif num==9:
-            ret=self.moveTableauToFoundation(6)
+        elif num>=10 and num <= 16:  #move tableau to foundation
+            lastDigit = int(repr(num)[-1]) # gets final digit
+            ret=self.moveTableauToFoundation(lastDigit)
         else:
             ret=False
         return ret

@@ -21,7 +21,7 @@ def interactivePlay():
             h = help
             1 = move stock to waste (and back)
             2 = move stock to foundation
-            3-9 = move tableau piles 0 to 6 to foundation
+            10-16 = move tableau piles 0 to 6 to foundation
             """
             print(s)
         elif k.isdigit():
