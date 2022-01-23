@@ -462,7 +462,7 @@ class PositionClass():
             ret=self.moveTableauToFoundation(lastDigit)
         elif num>=20 and num <= 26:  # move waste to tableau pile 0 to 6
             lastDigit = int(repr(num)[-1]) # gets final digit
-            #ret=self.moveWasteToTableau #still need to code!
+            ret=self.moveWasteToTableau(lastDigit) #still need to code!
         elif num>=100 and num <= 136:  # code - 1ij - move foundation pile i to tableau pile j
             foundationNum = int(repr(num)[-2])
             tableauNum = int(repr(num)[-1])
