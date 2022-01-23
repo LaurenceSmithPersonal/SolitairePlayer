@@ -442,6 +442,14 @@ class PositionClass():
             foundationNum = int(repr(num)[-2])
             tableauNum = int(repr(num)[-1])
             ret=self.moveFoundationToTableau(foundationNum,tableauNum)
+        elif num >= 10000 and num <= 16613:  # code - 1ijkl - move kl cards from tableau pile i to tableau pile j
+            tableauFromNum = int(repr(num)[1])
+            print("tableauFromNum = ", tableauFromNum)
+            tableauToNum = int(repr(num)[2])
+            print("tableauToNum = ", tableauToNum)
+            cardsToMove = int(repr(num)[3]+repr(num)[4])
+            print("cardsToMove = ", cardsToMove)
+            ret=self.moveTableauToTableau(tableauFromNum, tableauToNum, cardsToMove)
         else:
             ret=False
         return ret

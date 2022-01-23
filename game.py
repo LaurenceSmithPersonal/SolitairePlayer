@@ -23,6 +23,7 @@ def interactivePlay():
             2 = move stock to foundation
             10-16 = move tableau piles 0 to 6 to foundation
             100 - 136: code - 1ij - move foundation pile i to tableau pile j
+            10000 - 16613: code - 1ijkl - move kl cards from tableau pile i to tableau pile j
             """
             print(s)
         elif k.isdigit():
