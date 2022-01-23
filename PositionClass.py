@@ -388,6 +388,22 @@ class PositionClass():
         #ToDo need to test this function
     #end moveFoundationToTableau
 
+    def moveWasteToTableau(self, tableauNum):
+        """ moves card from Waste to Tableau """
+        if tableauNum < 0 or tableauNum > 6:
+            print("tableauNum:", tableauNum, " not allowed!")
+            return False
+        elif len(self.waste.cards) == 0:
+            print("No cards in waste to move")
+            return False
+        else:
+            card = deepcopy(self.waste.cards[-1])
+            ret = self.tableauPiles[tableauNum].addCard(card)
+            if ret == True: # move was ok
+                self.waste.cards.pop(-1) #remove card from foundation pile
+            # else: #move not ok return False
+            return ret
+
     def moveTableauToTableau(self, startTableauNum, endTableauNum, numCards):
         """ moves cards from Tableau to another Tableau """
         ok_to_move = False
@@ -444,6 +460,9 @@ class PositionClass():
         elif num>=10 and num <= 16:  # move tableau to foundation
             lastDigit = int(repr(num)[-1]) # gets final digit
             ret=self.moveTableauToFoundation(lastDigit)
+        elif num>=20 and num <= 26:  # move waste to tableau pile 0 to 6
+            lastDigit = int(repr(num)[-1]) # gets final digit
+            #ret=self.moveWasteToTableau #still need to code!
         elif num>=100 and num <= 136:  # code - 1ij - move foundation pile i to tableau pile j
             foundationNum = int(repr(num)[-2])
             tableauNum = int(repr(num)[-1])
