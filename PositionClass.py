@@ -363,7 +363,8 @@ class PositionClass():
                     ret = pile.addCard(card)
                     if ret == True:
                         self.tableauPiles[tableauNum].cards.remove(self.tableauPiles[tableauNum].cards[-1]) # remove card from pile
-                        self.tableauPiles[tableauNum].cards[-1].visible = True # make new top card visible
+                        if len(self.tableauPiles[tableauNum].cards) > 0: # if any cards left in tableau
+                            self.tableauPiles[tableauNum].cards[-1].visible = True # make new top card visible
             return ret
     #end moveTableauToFoundation
 
@@ -421,9 +422,14 @@ class PositionClass():
             for i in np.arange(-numCards, 0,1):
                 card = deepcopy(self.tableauPiles[startTableauNum].cards[i])
                 ret = self.tableauPiles[endTableauNum].addCard(card)
+            
+            #remove cards from start pile
             for i in np.arange(-numCards, 0,1):
-                #remove cards from start pile
                 self.tableauPiles[startTableauNum].cards.pop(-1)
+            
+            # if card left in start pile then make it visible
+            if len(self.tableauPiles[startTableauNum].cards) > 0:
+                self.tableauPiles[startTableauNum].cards[-1].visible = True # make new top card visible
             return True
         else:
             return False
