@@ -13,7 +13,6 @@
 # used https://github.com/suryadutta/solitaire/blob/master/card_elements.py for help with coding
 
 # ToDo 
-#   - moving foundation piles to foundation piles
 #   - create index for each card, with a value if don't know what card is
 #   - create index for positions
 #   - reading in positions
@@ -538,9 +537,6 @@ def testPositionClass():
     # print(str(position))
 #end testPositionClass
 
-
-
-# ToDo test moveStock
 
 #testPositionClass()
 #test
