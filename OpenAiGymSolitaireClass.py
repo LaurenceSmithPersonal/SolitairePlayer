@@ -15,6 +15,7 @@ from gym import Env, spaces
 
 class OpenAiGymSolitaireClass(Env):
     def __init__(self) -> None:
+        #print("In __init__")
         super(OpenAiGymSolitaireClass, self).__init__()
 
         # Define a 2-D observation space
@@ -41,30 +42,52 @@ class OpenAiGymSolitaireClass(Env):
         self.pos.setUp()
         self.reward = 0 # to keep the reward/score
         self.done = False # tell it when to stop
+        #print(self.pos.gameStr())
+        #print("Finished __init__")
     #end __init__
 
     def reset(self):
         ''' resets the environment (i.e. solitaire game) and returns new initial position'''
+        self.pos = PositionClass.PositionClass()
         self.pos.setUp()
         self.reward = 0 # to keep the reward/score
         self.done = False # tell it when to stop
 
         print(self.pos.gameStr()) # show the position
 
-        return self.positionClass_to_observation(self)
+        return self.positionClass_to_observation()
     #end reset
 
     def positionClass_to_observation(self):
         ''' takes in variable of type positionClass which must have been set up
             and returns the matrix as per the observation space '''
 
-        # set up return matrix
+        # set up return array
         ret = np.ones((13, 24), dtype=np.int32)  
         ret = ret * -2       # to set all to empty
 
-        # put in foundation for clubs
-        for i in self.pos.foundationPiles[0].cards
+        # put in foundations
+        for i in range(4):
+            for j in range(len(self.pos.foundationPiles[i].cards)):
+                ret[i,j] = self.pos.foundationPiles[i].cards[j].id
 
+        # put in stock
+        for j in range(len(self.pos.stock.cards)):
+            ret[4,j] = self.pos.stock.cards[j].id
+
+        # put in waste
+        for j in range(len(self.pos.waste.cards)):
+            ret[5,j] = self.pos.waste.cards[j].id
+        
+        # put in tableau
+        for i in range(7):
+            for j in range(len(self.pos.tableauPiles[i].cards)):
+                card = self.pos.tableauPiles[i].cards[j]
+                if card.visible:
+                    ret[i+6,j] = self.pos.tableauPiles[i].cards[j].id
+                else:
+                    ret[i+6,j] = -1
+        
         return ret
     #end positionClass_to_observation
 #end OpenAiGymSolitaireClass
