@@ -36,6 +36,38 @@ class OpenAiGymSolitaireClass(Env):
         # Define an action space ranging from 0 to 4
         self.action_space = spaces.Discrete(16613,start=1) # as per codes used for moves ToDo should we enumerate all possibilities to remove all the numbers that aren't allowed - would probably make AI much quicker
 
+        #set up the gaame
+        self.pos = PositionClass.PositionClass()
+        self.pos.setUp()
+        self.reward = 0 # to keep the reward/score
+        self.done = False # tell it when to stop
+    #end __init__
+
+    def reset(self):
+        ''' resets the environment (i.e. solitaire game) and returns new initial position'''
+        self.pos.setUp()
+        self.reward = 0 # to keep the reward/score
+        self.done = False # tell it when to stop
+
+        print(self.pos.gameStr()) # show the position
+
+        return self.positionClass_to_observation(self.pos)
+    #end reset
+
+    def positionClass_to_observation(self, pos):
+        ''' takes in variable of type positionClass which must have been set up
+            and returns the matrix as per the observation space '''
+
+        # set up return matrix
+        ret = np.ones((13, 24), dtype=np.int32)  
+        ret = ret * -2       # to set all to empty
+
+        return ret
+    #end positionClass_to_observation
+#end OpenAiGymSolitaireClass
+
+env = OpenAiGymSolitaireClass()
+print(env.reset())
 
 # testing spaces
 #x = spaces.Box(low=-2, high=51, shape=(13, 24), dtype=np.int32) 
