@@ -84,13 +84,46 @@ class OpenAiGymSolitaireClass(Env):
             for j in range(len(self.pos.tableauPiles[i].cards)):
                 card = self.pos.tableauPiles[i].cards[j]
                 if card.visible:
-                    ret[i+6,j] = self.pos.tableauPiles[i].cards[j].id
+                    ret[i+6,j] = card.id
                 else:
                     ret[i+6,j] = -1
         
         return ret
     #end positionClass_to_observation
+
+    def calculate_reward(self):
+        ''' takes in self and calculates reward from position
+            1 point for each visible card in tableau
+            5 points for each card in foundation piles
+            1000 points if game won (i.e. all cards in foundation piles'''
+        #ToDo do we need to have penalty here if try to do an illegal move?
+
+        score = 0
+
+        # check in tableau
+        for i in range(7):
+            for j in range(len(self.pos.tableauPiles[i].cards)):
+                card = self.pos.tableauPiles[i].cards[j]
+                if card.visible:
+                    score += 1
+        
+        # check in foundation
+        foundation_cards = 0
+        for i in range(4):
+            score += len(self.pos.foundationPiles[i].cards) * 5
+            foundation_cards += len(self.pos.foundationPiles[i].cards)
+
+        # if game won
+        if foundation_cards == 52:
+            score = 1000
+        
+        return score
+    #end calculate_reward
+
+    
 #end OpenAiGymSolitaireClass
+
+
 
 env = OpenAiGymSolitaireClass()
 print(env.reset())
