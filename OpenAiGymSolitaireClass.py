@@ -51,16 +51,19 @@ class OpenAiGymSolitaireClass(Env):
 
         print(self.pos.gameStr()) # show the position
 
-        return self.positionClass_to_observation(self.pos)
+        return self.positionClass_to_observation(self)
     #end reset
 
-    def positionClass_to_observation(self, pos):
+    def positionClass_to_observation(self):
         ''' takes in variable of type positionClass which must have been set up
             and returns the matrix as per the observation space '''
 
         # set up return matrix
         ret = np.ones((13, 24), dtype=np.int32)  
         ret = ret * -2       # to set all to empty
+
+        # put in foundation for clubs
+        for i in self.pos.foundationPiles[0].cards
 
         return ret
     #end positionClass_to_observation
