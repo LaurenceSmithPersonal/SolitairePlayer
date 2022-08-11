@@ -54,9 +54,31 @@ class OpenAiGymSolitaireClass(Env):
         self.done = False # tell it when to stop
 
         print(self.pos.gameStr()) # show the position
+        print("reward = ", self.calculate_reward())
 
         return self.positionClass_to_observation()
     #end reset
+
+    def step(self, action):
+        ''' returns the result of doing an action '''
+
+        # Flag that marks the termination of an episode
+        done = False
+        
+        # Assert that it is a valid action 
+        assert self.action_space.contains(action), "Invalid Action"
+
+        try_action = pos.moveByNumber(action)
+        if try_action == False:
+            print("Move not recognised")
+            done = True
+            self.reward = -1000
+        else:    
+            print(pos.gameStr())
+            self.reward = self.calculate_reward()
+
+        return self.positionClass_to_observation(), self.reward, done, [] 
+    #end step
 
     def positionClass_to_observation(self):
         ''' takes in variable of type positionClass which must have been set up
@@ -120,7 +142,7 @@ class OpenAiGymSolitaireClass(Env):
         return score
     #end calculate_reward
 
-    
+
 #end OpenAiGymSolitaireClass
 
 
