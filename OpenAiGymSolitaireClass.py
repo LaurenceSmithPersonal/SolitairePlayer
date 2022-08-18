@@ -9,6 +9,7 @@ import PositionClass
 import gym
 import random
 import numpy as np
+import pandas as pd
 
 from gym import Env, spaces
 #import time
@@ -34,8 +35,14 @@ class OpenAiGymSolitaireClass(Env):
         self.observation_space = spaces.Box(low=-2, high=51, shape=(13, 24), dtype=np.int32)        
     
         
-        # Define an action space ranging from 0 to 4
-        self.action_space = spaces.Discrete(16613,start=1) # as per codes used for moves ToDo should we enumerate all possibilities to remove all the numbers that aren't allowed - would probably make AI much quicker
+        # Define an action space 
+        # 1st try had too many impossible moves: self.action_space = spaces.Discrete(16613,start=1) # as per codes used for moves ToDo should we enumerate all possibilities to remove all the numbers that aren't allowed - would probably make AI much quicker
+        # import enumeration of moves to reduce number of impossible moves
+        self.move_enumeration = pd.read_csv("move_enumeration.csv") # file containing columns "enumeration" and "move" where all possible solitaire move by numbers are enumerated
+        #print(move_enumeration)
+        self.action_space = spaces.Discrete(548,start=1)
+
+        
 
         #set up the gaame
         self.pos = PositionClass.PositionClass()
@@ -68,7 +75,12 @@ class OpenAiGymSolitaireClass(Env):
         # Assert that it is a valid action 
         assert self.action_space.contains(action), "Invalid Action"
 
-        try_action = pos.moveByNumber(action)
+        #convert action from enumeration to move-by-number
+        move = self.move_enumeration["move"][action]
+        print("action: ", action)
+        print("move: ", move)
+
+        try_action = self.pos.moveByNumber(move)
         if try_action == False:
             print("Move not recognised")
             done = True
@@ -76,6 +88,8 @@ class OpenAiGymSolitaireClass(Env):
         else:    
             print(pos.gameStr())
             self.reward = self.calculate_reward()
+
+        print(self.reward)
 
         return self.positionClass_to_observation(), self.reward, done, [] 
     #end step
@@ -146,13 +160,27 @@ class OpenAiGymSolitaireClass(Env):
 #end OpenAiGymSolitaireClass
 
 
+############################################################################################
+# Try random actions
+############################################################################################
 
 env = OpenAiGymSolitaireClass()
 print(env.reset())
+
+while True:
+    # Take a random action
+    action = env.action_space.sample()
+    obs, reward, done, info = env.step(action)
+    
+    
+    if done == True:
+        break
+
+env.close()
 
 # testing spaces
 #x = spaces.Box(low=-2, high=51, shape=(13, 24), dtype=np.int32) 
 #print(x.sample())                        
 
-#x = spaces.Discrete(16613,start=1)
-#print(x.sample())                        
+x = spaces.Discrete(2,start=0)
+print(x.sample())                        
