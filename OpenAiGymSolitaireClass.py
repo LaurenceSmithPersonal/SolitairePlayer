@@ -179,7 +179,6 @@ if __name__ == "__main__":
         
         if done == True:
             break
-
     env.close()
 
     # testing spaces
@@ -188,4 +187,5 @@ if __name__ == "__main__":
 
     #x = spaces.Discrete(2,start=0)
     #print(x.sample())    
+
 # End if __name__ == "__main__":                    

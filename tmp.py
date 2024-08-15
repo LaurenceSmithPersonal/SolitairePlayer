@@ -32,7 +32,7 @@
 # print("A"+chr(9824))
 
 # OpenAI Gym example:
-import gym
+import gymnasium as gym
 
 
 
