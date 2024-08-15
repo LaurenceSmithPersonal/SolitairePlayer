@@ -1,6 +1,6 @@
 # Class to have a interface to PositionClass which will enable OpenAI Gym to use it for reinforcement learning
 # See tutorials https://blog.paperspace.com/getting-started-with-openai-gym/
-# https://blog.paperspace.com/creating-custom-environments-openai-gym/
+# https://gymnasium.farama.org/tutorials/gymnasium_basics/environment_creation/
 # Laurence Smith
 # 09/08/2022
 
@@ -15,6 +15,8 @@ from gym import Env, spaces
 #import time
 
 class OpenAiGymSolitaireClass(Env):
+    metadata = {"render_modes": ["ansi",], "render_fps": 4} #TODO check this is right!
+
     def __init__(self) -> None:
         #print("In __init__")
         super(OpenAiGymSolitaireClass, self).__init__()
