@@ -1,7 +1,8 @@
 absl-py==2.1.0
 cloudpickle==3.0.0
-gym==0.26.2
+Farama-Notifications==0.0.4
 gym-notices==0.0.8
+gymnasium==0.29.1
 h5py==3.11.0
 keras==3.4.1
 keras-rl==0.4.2
