@@ -38,7 +38,8 @@ class OpenAiGymSolitaireClass(Env):
     
         
         # Define an action space 
-        # 1st try had too many impossible moves: self.action_space = spaces.Discrete(16613,start=1) # as per codes used for moves ToDo should we enumerate all possibilities to remove all the numbers that aren't allowed - would probably make AI much quicker
+        # 1st try had too many impossible moves: self.action_space = spaces.Discrete(16613,start=1), as per codes used for moves. 
+        # Changed to enumerate all possibilities to remove all the numbers that aren't allowed.
         # import enumeration of moves to reduce number of impossible moves
         self.move_enumeration = pd.read_csv("move_enumeration.csv") # file containing columns "enumeration" and "move" where all possible solitaire move by numbers are enumerated
         #print(move_enumeration)
@@ -98,9 +99,9 @@ class OpenAiGymSolitaireClass(Env):
         reward = self.reward, 
         terminated = done
         truncated = False
-        info = [] 
+        info = {} # TODO put things in print statements above into info so can choose whether to do something with them later and don't print every time
 
-        return observation, reward, terminated, truncated, info # step must return these outputs
+        return observation, reward, terminated, truncated, info # step must return these outputs, see https://gymnasium.farama.org/api/env/#gymnasium.Env.step
     #end step
 
     def positionClass_to_observation(self):
@@ -181,10 +182,10 @@ if __name__ == "__main__":
     while True:
         # Take a random action
         action = env.action_space.sample()
-        obs, reward, done, info = env.step(action)
+        obs, reward, terminated, truncated, info = env.step(action)
         
         
-        if done == True:
+        if (terminated == True) or (truncated == True):
             break
     env.close()
 
