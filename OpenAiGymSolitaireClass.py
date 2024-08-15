@@ -69,7 +69,8 @@ class OpenAiGymSolitaireClass(Env):
     #end reset
 
     def step(self, action):
-        ''' returns the result of doing an action '''
+        ''' returns the result of doing an action 
+        here, moving some cards around '''
 
         # Flag that marks the termination of an episode
         done = False
@@ -93,7 +94,13 @@ class OpenAiGymSolitaireClass(Env):
 
         print(self.reward)
 
-        return self.positionClass_to_observation(), self.reward, done, [] 
+        observation = self.positionClass_to_observation()
+        reward = self.reward, 
+        terminated = done
+        truncated = False
+        info = [] 
+
+        return observation, reward, terminated, truncated, info # step must return these outputs
     #end step
 
     def positionClass_to_observation(self):
