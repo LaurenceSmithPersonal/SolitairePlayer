@@ -471,7 +471,7 @@ class PositionClass():
             print("tableauFromNum = ", tableauFromNum)
             tableauToNum = int(str(num)[2])
             print("tableauToNum = ", tableauToNum)
-            cardsToMove = int(str(num)[3]*10 + str(num)[4])
+            cardsToMove = int(str(num)[3] + str(num)[4])
             print("cardsToMove = ", cardsToMove)
             ret=self.moveTableauToTableau(tableauFromNum, tableauToNum, cardsToMove)
         else:
