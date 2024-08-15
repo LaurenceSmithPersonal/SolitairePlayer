@@ -40,4 +40,6 @@ def interactivePlay():
     
 #end interactivePlay
 
-interactivePlay()
+if __name__ == "__main__":
+    interactivePlay()
+# End if __name__ == "__main__":

@@ -161,28 +161,31 @@ class OpenAiGymSolitaireClass(Env):
 
 #end OpenAiGymSolitaireClass
 
+if __name__ == "__main__":
 
-############################################################################################
-# Try random actions
-############################################################################################
+    ############################################################################################
+    # Try random actions
+    ############################################################################################
 
-env = OpenAiGymSolitaireClass()
-print(env.reset())
 
-while True:
-    # Take a random action
-    action = env.action_space.sample()
-    obs, reward, done, info = env.step(action)
-    
-    
-    if done == True:
-        break
+    env = OpenAiGymSolitaireClass()
+    print(env.reset())
 
-env.close()
+    while True:
+        # Take a random action
+        action = env.action_space.sample()
+        obs, reward, done, info = env.step(action)
+        
+        
+        if done == True:
+            break
 
-# testing spaces
-#x = spaces.Box(low=-2, high=51, shape=(13, 24), dtype=np.int32) 
-#print(x.sample())                        
+    env.close()
 
-#x = spaces.Discrete(2,start=0)
-#print(x.sample())                        
+    # testing spaces
+    #x = spaces.Box(low=-2, high=51, shape=(13, 24), dtype=np.int32) 
+    #print(x.sample())                        
+
+    #x = spaces.Discrete(2,start=0)
+    #print(x.sample())    
+# End if __name__ == "__main__":                    

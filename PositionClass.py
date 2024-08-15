@@ -537,11 +537,12 @@ def testPositionClass():
     # print(str(position))
 #end testPositionClass
 
+if __name__ == "__main__":
+    #testPositionClass()
+    #test
+    #deck = DeckClass(deckDetails,shuffle=False)
+    #print(str(deck))
+    #testFoundationPileClass()
 
-#testPositionClass()
-#test
-#deck = DeckClass(deckDetails,shuffle=False)
-#print(str(deck))
-#testFoundationPileClass()
-
-#test
+    #test
+# End if __name__ == "__main__":
