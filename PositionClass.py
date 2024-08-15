@@ -457,21 +457,21 @@ class PositionClass():
         elif num==2:
             ret=self.moveWasteToFoundation()
         elif num>=10 and num <= 16:  # move tableau to foundation
-            lastDigit = int(repr(num)[-1]) # gets final digit
+            lastDigit = int(str(num)[-1]) # gets final digit
             ret=self.moveTableauToFoundation(lastDigit)
         elif num>=20 and num <= 26:  # move waste to tableau pile 0 to 6
-            lastDigit = int(repr(num)[-1]) # gets final digit
+            lastDigit = int(str(num)[-1]) # gets final digit
             ret=self.moveWasteToTableau(lastDigit) #still need to code!
         elif num>=100 and num <= 136:  # code - 1ij - move foundation pile i to tableau pile j
-            foundationNum = int(repr(num)[-2])
-            tableauNum = int(repr(num)[-1])
+            foundationNum = int(str(num)[-2])
+            tableauNum = int(str(num)[-1])
             ret=self.moveFoundationToTableau(foundationNum,tableauNum)
         elif num >= 10000 and num <= 16613:  # code - 1ijkl - move kl cards from tableau pile i to tableau pile j
-            tableauFromNum = int(repr(num)[1])
+            tableauFromNum = int(str(num)[1])
             print("tableauFromNum = ", tableauFromNum)
-            tableauToNum = int(repr(num)[2])
+            tableauToNum = int(str(num)[2])
             print("tableauToNum = ", tableauToNum)
-            cardsToMove = int(repr(num)[3]+repr(num)[4])
+            cardsToMove = int(str(num)[3]*10 + str(num)[4])
             print("cardsToMove = ", cardsToMove)
             ret=self.moveTableauToTableau(tableauFromNum, tableauToNum, cardsToMove)
         else:

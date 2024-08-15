@@ -11,13 +11,13 @@ import random
 import numpy as np
 import pandas as pd
 
-from gym import Env, spaces
+from gymnasium import Env, spaces
 #import time
 
 class OpenAiGymSolitaireClass(Env):
     metadata = {"render_modes": ["ansi",], "render_fps": 4} #TODO check this is right!
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode="ansi") -> None:
         #print("In __init__")
         super(OpenAiGymSolitaireClass, self).__init__()
 
@@ -184,5 +184,5 @@ env.close()
 #x = spaces.Box(low=-2, high=51, shape=(13, 24), dtype=np.int32) 
 #print(x.sample())                        
 
-x = spaces.Discrete(2,start=0)
-print(x.sample())                        
+#x = spaces.Discrete(2,start=0)
+#print(x.sample())                        
