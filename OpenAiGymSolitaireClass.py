@@ -272,7 +272,7 @@ if __name__ == "__main__":
 
     # Train the model
     env = OpenAiGymSolitaireClass()
-    env.train(num_episodes=1000)
+    env.train(num_episodes=100000)
 
     # Save the trained model
     env.save_model("solitaire_model.pkl")
