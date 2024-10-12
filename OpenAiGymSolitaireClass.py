@@ -218,13 +218,14 @@ class OpenAiGymSolitaireClass(Env):
                 done = terminated or truncated
 
             if episode % 100 == 0:
+                sys.stdout = original_stdout  # Temporarily restore stdout
                 print(f"Episode {episode}, Total Reward: {total_reward}")
+                sys.stdout = io.StringIO()  # Redirect stdout back to string buffer
 
             self.reset()
 
         sys.stdout = original_stdout  # Restore stdout
         print("Training completed.")
-
 #end OpenAiGymSolitaireClass
 
 if __name__ == "__main__":
@@ -259,7 +260,7 @@ if __name__ == "__main__":
     ############################################################################################
 
     env = OpenAiGymSolitaireClass()
-    env.train(num_episodes=100000)
+    env.train(num_episodes=1000)
 
     # Test the trained agent
     state = env.reset()
