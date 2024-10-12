@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 import sys
 import io
+import pickle
 
 from gymnasium import Env, spaces
 #import time
@@ -226,6 +227,16 @@ class OpenAiGymSolitaireClass(Env):
 
         sys.stdout = original_stdout  # Restore stdout
         print("Training completed.")
+
+    def save_model(self, filename):
+        with open(filename, 'wb') as f:
+            pickle.dump(self.q_table, f)
+        print(f"Model saved to {filename}")
+
+    def load_model(self, filename):
+        with open(filename, 'rb') as f:
+            self.q_table = pickle.load(f)
+        print(f"Model loaded from {filename}")
 #end OpenAiGymSolitaireClass
 
 if __name__ == "__main__":
@@ -259,8 +270,12 @@ if __name__ == "__main__":
     # Training code
     ############################################################################################
 
+    # Train the model
     env = OpenAiGymSolitaireClass()
     env.train(num_episodes=1000)
+
+    # Save the trained model
+    env.save_model("solitaire_model.pkl")
 
     # Test the trained agent
     state = env.reset()
@@ -281,3 +296,4 @@ if __name__ == "__main__":
     env.close()
 
 # End if __name__ == "__main__":                    
+
