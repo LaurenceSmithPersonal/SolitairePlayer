@@ -90,7 +90,7 @@ class OpenAiGymSolitaireClass(Env):
             done = True
             self.reward = -1000
         else:    
-            print(pos.gameStr())
+            print(self.pos.gameStr())
             self.reward = self.calculate_reward()
 
         print(self.reward)
