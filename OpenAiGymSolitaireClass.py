@@ -10,6 +10,8 @@ import gymnasium as gym
 import random
 import numpy as np
 import pandas as pd
+import sys
+import io
 
 from gymnasium import Env, spaces
 #import time
@@ -17,7 +19,7 @@ from gymnasium import Env, spaces
 class OpenAiGymSolitaireClass(Env):
     metadata = {"render_modes": ["ansi",], "render_fps": 4} #TODO check this is right!
 
-    def __init__(self, render_mode="ansi") -> None:
+    def __init__(self, render_mode="ansi", verbose=True) -> None:
         #print("In __init__")
         super(OpenAiGymSolitaireClass, self).__init__()
 
@@ -43,7 +45,7 @@ class OpenAiGymSolitaireClass(Env):
         # import enumeration of moves to reduce number of impossible moves
         self.move_enumeration = pd.read_csv("move_enumeration.csv") # file containing columns "enumeration" and "move" where all possible solitaire move by numbers are enumerated
         #print(move_enumeration)
-        self.action_space = spaces.Discrete(548,start=1)
+        self.action_space = spaces.Discrete(548, start=0)
 
         # Add Q-learning components
         self.q_table = {}
@@ -58,6 +60,7 @@ class OpenAiGymSolitaireClass(Env):
         self.done = False # tell it when to stop
         #print(self.pos.gameStr())
         #print("Finished __init__")
+        self.verbose = verbose
     #end __init__
 
     def reset(self):
@@ -67,8 +70,9 @@ class OpenAiGymSolitaireClass(Env):
         self.reward = 0 # to keep the reward/score
         self.done = False # tell it when to stop
 
-        print(self.pos.gameStr()) # show the position
-        print("reward = ", self.calculate_reward())
+        if self.verbose:
+            print(self.pos.gameStr())
+            print("reward = ", self.calculate_reward())
 
         return self.positionClass_to_observation()
     #end reset
@@ -194,6 +198,9 @@ class OpenAiGymSolitaireClass(Env):
         self.q_table[state][action] = new_q
 
     def train(self, num_episodes):
+        original_stdout = sys.stdout
+        sys.stdout = io.StringIO()  # Redirect stdout to a string buffer
+
         for episode in range(num_episodes):
             state = self.get_state()
             total_reward = 0
@@ -215,6 +222,7 @@ class OpenAiGymSolitaireClass(Env):
 
             self.reset()
 
+        sys.stdout = original_stdout  # Restore stdout
         print("Training completed.")
 
 #end OpenAiGymSolitaireClass
@@ -251,7 +259,7 @@ if __name__ == "__main__":
     ############################################################################################
 
     env = OpenAiGymSolitaireClass()
-    env.train(num_episodes=10000)
+    env.train(num_episodes=100000)
 
     # Test the trained agent
     state = env.reset()
