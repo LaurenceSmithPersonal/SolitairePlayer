@@ -13,7 +13,7 @@ def test_model(env, num_games=100):
             action = env.get_action(state)
             observation, reward, terminated, truncated, _ = env.step(action)
             next_state = env.get_state()
-            game_reward += reward
+            game_reward = reward
 
             state = next_state
             done = terminated or truncated

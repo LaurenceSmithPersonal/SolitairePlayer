@@ -211,7 +211,7 @@ class OpenAiGymSolitaireClass(Env):
                 action = self.get_action(state)
                 observation, reward, terminated, truncated, _ = self.step(action)
                 next_state = self.get_state()
-                total_reward += reward
+                total_reward = reward
 
                 self.update_q_table(state, action, reward, next_state)
 
@@ -287,7 +287,7 @@ if __name__ == "__main__":
         action = env.get_action(state)
         observation, reward, terminated, truncated, _ = env.step(action)
         next_state = env.get_state()
-        total_reward += reward
+        total_reward = reward
 
         state = next_state
         done = terminated or truncated
